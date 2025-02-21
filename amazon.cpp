@@ -9,6 +9,10 @@
 #include "db_parser.h"
 #include "product_parser.h"
 #include "util.h"
+#include "mydatastore.h"
+#include "datastore.h"
+#include "book.h"
+
 
 using namespace std;
 struct ProdNameSorter {
@@ -27,11 +31,9 @@ int main(int argc, char* argv[])
 
     /****************
      * Declare your derived DataStore object here replacing
-     *  DataStore type to your derived type
+     *  DataStore type to derived type MyDataStore
      ****************/
-    DataStore ds;
-
-
+    MyDataStore ds;
 
     // Instantiate the individual section and product parsers we want
     ProductSectionParser* productSectionParser = new ProductSectionParser;
@@ -99,11 +101,25 @@ int main(int argc, char* argv[])
                 }
                 done = true;
             }
-	    /* Add support for other commands here */
-
-
-
-
+            else if ( cmd == "VIEWCART"){
+                string term;
+                ss>>term;
+                term = convToLower(term);
+                ds.viewCart(term);
+            }
+            else if ( cmd == "BUYCART"){
+                string term;
+                ss>>term;
+                term = convToLower(term);
+                ds.buyCart(term);
+            }
+            else if ( cmd == "ADD"){
+                string username;
+                int search_hit_num;
+                ss>>username>>search_hit_num;
+                //std::cout<<"here"<<std::endl;
+                ds.addtoCart(username, search_hit_num, hits);
+            }
             else {
                 cout << "Unknown command" << endl;
             }

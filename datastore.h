@@ -1,3 +1,4 @@
+
 #ifndef DATASTORE_H
 #define DATASTORE_H
 #include <string>
@@ -18,6 +19,7 @@
 
 class DataStore {
 public:
+    
     virtual ~DataStore() { }
 
     /**
@@ -41,7 +43,6 @@ public:
      * Reproduce the database file from the current Products and User values
      */
     virtual void dump(std::ostream& ofile) = 0;
-
 
 };
 
